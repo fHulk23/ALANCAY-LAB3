@@ -1,5 +1,5 @@
 <template>
-    <div class ="Operacion-venta-de-cripto">
+    <div class ="OperacionesDeventa">
       <h2>Operaciones de Venta de Criptomonedas</h2>
       <form @submit.prevent="operacionVenta" class="transaccion-ventas">
         <div>
@@ -26,7 +26,7 @@
           <input type="number" v-model="importe" step="0.01any" required />
         </div>
   
-        <button type="submit" class="boton-operacionventa">Venta</button>
+        <button type="submit" class="boton-operacionVenta">Venta</button>
       </form>
     </div>
   </template>
@@ -47,7 +47,7 @@ import apiAxios from '@/service/apiAxios';
     },
     methods: {
       async operacionVentas() {
-        if (this.cantidadcripto > 0 || this.importe > 0) {
+        if (this.cantidadcripto > 0 && this.importe > 0) {
           alert("La cantidad y el monto deben ser mayores a 0.");
           return;
         }
@@ -59,13 +59,13 @@ import apiAxios from '@/service/apiAxios';
           action: this.operacionVenta,
           crypto_code: this.cripto,
           crypto_amount: parseFloat(this.cantidadcripto).toFixed(2),
-          money: parseFloat(this.monto).toFixed(2),
+          money: parseFloat(this.importe).toFixed(2),
           datetime: this.fecha,
         };
   
         try {
           const response = await apiAxios.post('/transactions', transactionData);
-          if (response.ok) {
+          if (response.status === 200) {
             alert("Transacción registrada exitosamente.");
             this.clearForm();
           } else {
@@ -78,10 +78,45 @@ import apiAxios from '@/service/apiAxios';
       },
       clearForm() {
         this.cantidadcripto = "";
-        this.monto= "";
+        this.importe= "";
         this.fecha = new Date().toISOString().slice(0, 16); 
+        this.cripto = "btc";
       },
     },
   };
   </script>
+
+  <style scoped>
+  .Operacion {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
   
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  </style>

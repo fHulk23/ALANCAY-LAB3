@@ -26,7 +26,7 @@
           <input type="number" v-model="importe" step="0.01any" required />
         </div>
   
-        <button type="submit" class="boton-operacionVenta">Venta</button>
+        <button type="submit" class="boton-operacionVenta">Vender</button>
       </form>
     </div>
   </template>

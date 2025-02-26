@@ -32,14 +32,14 @@
 </template>
 
 <script>
- import apiClient from '@/service/apiClient';
+import apiAxios from '@/service/apiAxios';
+
 export default {
   name: "HistorialDeTransaccionesTatu",
   data() {
     return {
       movimientos: [],
-      error: '',    
-      userId: 'valor_introducido_login',  
+      error: '',   
     };
   },
   created() {
@@ -48,7 +48,9 @@ export default {
   methods: {
     async obtenerMovimientos() {
       try {
-        const response = await apiClient.get(`/transactions?q={"user_id":"${this.userId}"}`);
+        const userId = localStorage.getItem("user_id");
+
+        const response = await apiAxios.get(`/transactions?q={"user_id":"${userId}"}`);
         this.movimientos = response.data;
       } catch (error) {
         this.error = 'Error al obtener los movimientos.';
@@ -68,7 +70,7 @@ export default {
     async borrarMovimiento(id) {
       if (confirm('¿Estás seguro de que deseas borrar este movimiento?')) {
         try {
-          await apiClient.delete(`/transactions/${id}`);
+          await apiAxios.delete(`/transactions/${id}`);
           this.movimientos = this.movimientos.filter((mov) => mov._id !== id);
         } catch (error) {
           this.error = 'Error al borrar el movimiento.';

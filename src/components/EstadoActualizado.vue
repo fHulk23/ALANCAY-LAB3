@@ -41,8 +41,7 @@
       return {
         cryptos: [],    
         totalMoney: 0,    
-        error: '',       
-        userId: '13123123', 
+        error: '',
       };
     },
     created() {
@@ -50,8 +49,10 @@
     },
     methods: {
       async obtenerTransacciones() {
-        try {
-          const response = await apiAxios.get(`/transactions?q={"user_id": "`+123123+`"}`).data;
+        try {  
+          const userId = localStorage.getItem("user_id");
+
+          const response = await apiAxios.get(`/transactions?q={"user_id": "`+userId+`"}`).data;
           
           const groupedCryptos = this.agruparTransacciones(response.data);
   

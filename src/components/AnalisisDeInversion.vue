@@ -32,13 +32,14 @@ export default {
     return {
       transactions: [],
       investmentResults: {},
-      userId: "valor_introducido_login",
     };
   },
   methods: {
     async fetchTransactions() {
       try {
-        const response = await apiAxios.get(`/transactions?q={"user_id": "`+123123+`"}`);
+        const userId = localStorage.getItem("user_id");
+
+        const response = await apiAxios.get(`/transactions?q={"user_id": "`+userId+`"}`);
         this.transactions = response.data;
         this.calculateInvestmentResults();
       } catch (error) {

@@ -64,19 +64,20 @@ export default {
       }
 
       try {
-        const user_id = "valor_introducido_login";
+        const userId = localStorage.getItem("user_id");
+
         const transaction = {
-          user_id,
+          user_id: userId,
           action: "purchase",
-          cripto: this.form.cripto,
-          cantidad: this.form.cantidadcripto,
-          importe: this.form.importe,
-          fecha: this.form.fecha,
+          crypto_code: this.form.cripto,
+          crypto_amount: this.form.cantidadcripto,
+          money: this.form.importe,
+          datetime: this.form.fecha,
         };
 
         const response = await apiAxios.post('/transactions', transaction)
 
-        if (response.status === 200) {
+        if (response.data != null) {
           this.success = true;
           this.form = { cripto: '', cantidadcripto: null, importe: null, fecha: '' };
         } else {

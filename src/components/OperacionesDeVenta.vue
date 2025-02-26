@@ -1,10 +1,10 @@
 <template>
     <div class ="OperacionesDeventa">
       <h2>Operaciones de Venta de Criptomonedas</h2>
-      <form @submit.prevent="operacionVenta" class="transaccion-ventas">
+      <form @submit.prevent="operacionVentas" class="transaccion-ventas">
         <div>
           <label for="cripto">Criptomonedas:</label>
-          <select v-model="cripto" required>
+          <select v-model="form.cripto" required>
             <option value="usdc">USDC</option>
             <option value="btc">Bitcoin</option>
             <option value="eth">Ethereum</option>
@@ -13,17 +13,17 @@
   
         <div>
           <label for="cantidadcripto">Cantidad</label>
-          <input type="number" v-model="cantidadcripto" step="0.0001" required />
+          <input type="number" v-model="form.cantidadcripto" step="0.0001" required />
         </div>
   
         <div>
           <label for="fecha">Fecha</label>
-          <input type="datetime-local" v-model="fecha" required />
+          <input type="datetime-local" v-model="form.fecha" required />
         </div>
   
         <div>
           <label for="importe">Ingrese importe $ :</label>
-          <input type="number" v-model="importe" step="0.01any" required />
+          <input type="number" v-model="form.importe" step="0.01any" required />
         </div>
   
         <button type="submit" class="boton-operacionVenta">Vender</button>
@@ -38,16 +38,18 @@ import apiAxios from '@/service/apiAxios';
     name: "OperacionesDeVenta",    
     data() {
       return {
-        cripto: "btc",
-        cantidadcripto: null,
-        fecha: '',
-        importe: null,
-        operacionVenta: "venta",
+        form: {
+          cripto: '',
+          cantidadcripto: null,
+          importe: null,
+          fecha: '',
+          operacionVenta: "sale",
+        },
       };
     },
     methods: {
       async operacionVentas() {
-        if (this.cantidadcripto > 0 && this.importe > 0) {
+        if (this.form.cantidadcripto <= 0 && this.form.importe <= 0) {
           alert("La cantidad y el monto deben ser mayores a 0.");
           return;
         }
@@ -56,16 +58,16 @@ import apiAxios from '@/service/apiAxios';
   
         const transactionData = {
           user_id: userId,
-          action: this.operacionVenta,
-          crypto_code: this.cripto,
-          crypto_amount: parseFloat(this.cantidadcripto).toFixed(2),
-          money: parseFloat(this.importe).toFixed(2),
-          datetime: this.fecha,
+          action: this.form.operacionVenta,
+          crypto_code: this.form.cripto,
+          crypto_amount: this.form.cantidadcripto,
+          money: this.form.importe,
+          datetime: this.form.fecha,
         };
   
         try {
           const response = await apiAxios.post('/transactions', transactionData);
-          if (response.status === 200) {
+          if (response.data != null) {
             alert("Transacción registrada exitosamente.");
             this.clearForm();
           } else {

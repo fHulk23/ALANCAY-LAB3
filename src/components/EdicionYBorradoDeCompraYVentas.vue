@@ -45,8 +45,7 @@
       return {
         transaccion: null, 
         isEditing: false, 
-        error: '', 
-        userId: 'valor_introducido_login', 
+        error: '',
         transaccionId: '',
       };
     },

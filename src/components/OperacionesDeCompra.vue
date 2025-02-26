@@ -1,6 +1,6 @@
 <template>
-  <div class="Operacion compra de cripto">
-    <h2>Operacion-compra-de-cripto</h2>
+  <div class="OperacionesDeCompra">
+    <h2>Operacion compra de Cripto</h2>
     
     <form @submit.prevent="submitForm">
       <div>
@@ -24,8 +24,8 @@
       </div>
 
       <div>
-        <label for="datetime">Fecha y hora</label>
-        <input type="datetime-local" v-model="form.datetime" required />
+        <label for="fecha">Fecha y hora</label>
+        <input type="datetime-local" v-model="form.fecha" required />
       </div>
 
       <button type="submit" class="boton-operacionCompra">Compra</button>
@@ -58,7 +58,7 @@ export default {
       this.error = "";
       this.success = false;
 
-      if (!this.form.cripto || this.form.cantidadcripto <= 0 || this.form.importe <= 0 || !this.form.datetime) {
+      if (!this.form.cripto || this.form.cantidadcripto <= 0 || this.form.importe <= 0 || !this.form.fecha) {
         this.error = "Todos los campos deben ser válidos.";
         return;
       }
@@ -71,12 +71,12 @@ export default {
           cripto: this.form.cripto,
           cantidad: this.form.cantidadcripto,
           importe: this.form.importe,
-          fecha: this.form.datetime,
+          fecha: this.form.fecha,
         };
 
         const response = await apiAxios.post('/transactions', transaction)
 
-        if (response.ok) {
+        if (response.status === 200) {
           this.success = true;
           this.form = { cripto: '', cantidadcripto: null, importe: null, fecha: '' };
         } else {

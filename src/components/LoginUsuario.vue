@@ -2,8 +2,9 @@
     <div class="div" >
 
       <h1>Iniciar Sesión</h1>
-      <form @submit.prevent="handleLogin"/>
-        <label class="label" for="user_id">INGRESE SU ID de Usuario:</label> 
+
+      <form @submit.prevent="handleLogin">
+        <label class="label" for="user_id">INGRESE SU ID de Usuario</label> 
         <input
         class="input"
         type="text"
@@ -13,10 +14,10 @@
         required
       />
       
-      <button type="submit">Iniciar Sesión</button>
-     
-    </div>
-  </template>
+      <button type="submit" :disabled="!userId">Iniciar Sesión</button>
+   </form>
+  </div>
+</template>
   
   <script>
   export default {
@@ -40,15 +41,20 @@
   </script>
 
 <style scoped>
-
 .div {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .input {
   padding: 10px;
   margin: 10px 0;
   width: 100%;
+  max-width: 300px;
 }
 
 .label {
@@ -62,10 +68,18 @@ button {
   color: white;
   border: none;
   cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 300px;
 }
 
 button:disabled {
   background-color: #ccc;
 }
+
+@media (max-width: 600px) {
+  .div {
+    width: 90%;
+  }
+}
 </style>
-  

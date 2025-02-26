@@ -31,8 +31,8 @@ const routes = [
       component: OperacionesdeCompra,
     },
     {
-      path: '/historialTransaccionestatu',
-      name: 'historialTransaccionestatu',
+      path: '/HistorialDeTransaccionestatu',
+      name: 'HistorialDeTransaccionestatu',
       component: HistorialDeTransaccionesTatu,
     },
     {
@@ -46,8 +46,8 @@ const routes = [
         component: EdicionYBorradoDeCompraYVentas,
       },
     {
-      path: '/Analisisinversion',
-      name: 'Analisisinversion',
+      path: '/AnalisisDeInversion',
+      name: 'AnalisisDeInversion',
       component: AnalisisDeInversion
     },
   ];

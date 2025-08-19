@@ -28,6 +28,7 @@
           <p><strong>Total: </strong>{{ totalMoney }} ARS</p>
         </div>
       </div>
+       <button @click="volverMenu()">Volver al Menú</button>
     </div>
   </template>
   
@@ -118,6 +119,9 @@
       formatearDinero(cantidad) {
         return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(cantidad);
       },
+      volverMenu(){
+      this.$router.push('/Menuprincipal');
+    },
     },
   };
   </script>
@@ -157,5 +161,20 @@
     font-weight: bold;
     text-align: right;
   }
+
+  button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
   </style>
   

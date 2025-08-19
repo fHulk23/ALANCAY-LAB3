@@ -26,6 +26,7 @@
         </div>
       </li>
     </ul>
+     <button @click="volverMenu()">Volver al Menú</button>
   </div>
 </template>
 
@@ -76,6 +77,9 @@ export default {
           console.error(error);
         }
       }
+    },
+    volverMenu(){
+      this.$router.push('/Menuprincipal');
     },
   },
 };

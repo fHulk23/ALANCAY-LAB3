@@ -33,6 +33,7 @@
 
     <p v-if="error" class="error">{{ error }}</p>
     <p v-if="success" class="success">Compra guardada correctamente</p>
+           <button @click="volverMenu()" style="background-color: blue; margin-top: 10px;">Volver al Menú</button>
   </div>
 </template>
 
@@ -87,6 +88,9 @@ export default {
       } catch (error) {
         this.error = "No se pudo conectar con el servidor.";
       }
+    },
+    volverMenu(){
+      this.$router.push('/Menuprincipal');
     },
   },
 };

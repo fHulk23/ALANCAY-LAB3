@@ -19,6 +19,7 @@
         </tr>
       </tbody>
     </table>
+    <button @click="volverMenu()">Volver al Menú</button>
   </div>
 </template>
 
@@ -98,6 +99,9 @@ export default {
     formatearDinero(cantidad) {
         return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(cantidad);
     },
+    volverMenu(){
+      this.$router.push('/Menuprincipal');
+    },
   },
   mounted() {
     this.fetchTransactions();
@@ -119,5 +123,20 @@ table, th, td {
 th, td {
   padding: 8px;
   text-align: left;
+}
+
+button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 </style>

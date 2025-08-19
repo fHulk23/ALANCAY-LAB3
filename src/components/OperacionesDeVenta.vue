@@ -28,6 +28,7 @@
   
         <button type="submit" class="boton-operacionVenta">Vender</button>
       </form>
+       <button @click="volverMenu()" style="background-color: blue; margin-top: 10px;">Volver al Menú</button>
     </div>
   </template>
   
@@ -85,6 +86,9 @@ import apiAxios from '@/service/apiAxios';
         this.fecha = new Date().toISOString().slice(0, 16); 
         this.cripto = "btc";
       },
+      volverMenu(){
+      this.$router.push('/Menuprincipal');
+    },
     },
   };
   </script>

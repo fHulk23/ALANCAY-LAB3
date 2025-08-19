@@ -80,6 +80,7 @@ export default {
         if (response.data != null) {
           this.success = true;
           this.form = { cripto: '', cantidadcripto: null, importe: null, fecha: '' };
+          this.$router.push('/Menuprincipal');
         } else {
           this.error = "Hubo un error al guardar la compra.";
         }

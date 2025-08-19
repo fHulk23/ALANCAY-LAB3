@@ -70,6 +70,7 @@ import apiAxios from '@/service/apiAxios';
           if (response.data != null) {
             alert("Transacción registrada exitosamente.");
             this.clearForm();
+            this.$router.push('/Menuprincipal');
           } else {
             alert("Hubo un error al registrar la transacción.");
           }

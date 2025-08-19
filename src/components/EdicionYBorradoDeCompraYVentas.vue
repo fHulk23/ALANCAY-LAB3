@@ -30,15 +30,14 @@
   
         <div v-else>
           <button @click="iniciarEdicion">Editar</button>
-          <button @click="borrarTransaccion">Borrar</button>
         </div>
       </div>
     </div>
   </template>
   
   <script>
-  import apiClient from '@/service/apiClient';
-  
+  import apiAxios from '@/service/apiAxios';
+
   export default {
     name: "EdicionYBorradoDeCompraYVentas",
     data() {
@@ -56,7 +55,7 @@
     methods: {
       async obtenerTransaccion() {
         try {
-          const response = await apiClient.get(`/transactions/${this.transaccionId}`);
+          const response = await apiAxios.get(`/transactions/${this.transaccionId}`);
           this.transaccion = response.data;
         } catch (error) {
           this.error = 'Error al obtener los detalles de la transacción.';
@@ -80,26 +79,15 @@
             money: this.transaccion.money,
           };
           
-          const response = await apiClient.patch(`/transactions/${this.transaccionId}`, updatedData);
+          const response = await apiAxios.patch(`/transactions/${this.transaccionId}`, updatedData);
           this.transaccion = response.data; 
-          this.isEditing = false;     
+          this.isEditing = false;
+          this.$router.push('/HistorialDeTransaccionesTatu'); 
         } catch (error) {
           this.error = 'Error al actualizar la transacción.';
           console.error(error);
         }
       },
-  
-      async borrarTransaccion() {
-        if (confirm('¿Estás seguro de que deseas borrar esta transacción?')) {
-          try {
-            await apiClient.delete(`/transactions/${this.transaccionId}`);
-            this.$router.push('/historial'); 
-          } catch (error) {
-            this.error = 'Error al borrar la transacción.';
-            console.error(error);
-          }
-        }
-      }
     }
   };
   </script>

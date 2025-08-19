@@ -41,8 +41,8 @@ const routes = [
       component: Estadoactualizado,
     },
     {
-        path: '/Edicionyborradodecomprayventas',
-        name: 'Edicionyborradodecomprayventas',
+        path: '/Edicionyborradodecomprayventas/:id',
+        name: 'editarMovimiento',
         component: EdicionYBorradoDeCompraYVentas,
       },
     {

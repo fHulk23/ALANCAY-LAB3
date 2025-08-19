@@ -9,7 +9,6 @@
           <li><router-link to="/HistorialDeTransaccionesTatu">Historial De Transacciones Tatu</router-link></li>
           <li><router-link to="/EstadoActualizado">Estado Actualizado de tu Billetera</router-link></li>
           <li><router-link to="/AnalisisDeInversion">Analisis De Inversion</router-link></li>
-          <li><router-link to="/EdicionYBorradoDeCompraYVentas">Edicion de Compras y Ventas</router-link></li>
         </ul>
       </nav>
     </div>

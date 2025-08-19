@@ -26,8 +26,6 @@
         </div>
       </li>
     </ul>
-
-    <button v-if="movimientos.length > 0" @click="cargarMas">Cargar más</button>
   </div>
 </template>
 
@@ -72,15 +70,12 @@ export default {
         try {
           await apiAxios.delete(`/transactions/${id}`);
           this.movimientos = this.movimientos.filter((mov) => mov._id !== id);
+          this.obtenerMovimientos();
         } catch (error) {
           this.error = 'Error al borrar el movimiento.';
           console.error(error);
         }
       }
-    },
-
-    cargarMas() {
-      console.log('Cargando más movimientos...');
     },
   },
 };

@@ -49,25 +49,24 @@
     },
     methods: {
       async obtenerTransacciones() {
-        try {  
+        try {
           const userId = localStorage.getItem("user_id");
+          const response = (await apiAxios.get(`/transactions?q={"user_id": "`+userId+`"}`)).data;
 
-          const response = await apiAxios.get(`/transactions?q={"user_id": "`+userId+`"}`).data;
-          
-          const groupedCryptos = this.agruparTransacciones(response.data);
-  
+          const groupedCryptos = this.agruparTransacciones(response);
+
           for (const cryptoCode in groupedCryptos) {
             const totalAmount = groupedCryptos[cryptoCode].amount;
             const currentPrice = await this.obtenerPrecioCrypto(cryptoCode);
             const totalMoney = totalAmount * currentPrice;
+            this.totalMoney += totalMoney;
             this.cryptos.push({
               name: cryptoCode.toUpperCase(),
-              amount: totalAmount,
+              amount: this.formatearDinero(totalAmount),
               money: this.formatearDinero(totalMoney),
             });
           }
   
-          this.totalMoney = this.cryptos.reduce((total, crypto) => total + parseFloat(crypto.money.replace(' ARS', '').replace(',', '')), 0);
           this.totalMoney = this.formatearDinero(this.totalMoney);
           
         } catch (error) {
@@ -109,7 +108,7 @@
       async obtenerPrecioCrypto(cryptoCode) {
         try {
           const response = await getCryptoValues(cryptoCode);
-          return response.data.ask;
+          return response.ask;
         } catch (error) {
           console.error(`Error al obtener el precio de ${cryptoCode}:`, error);
           return 0;

@@ -13,9 +13,9 @@
       <tbody>
         <tr v-for="(result, crypto) in investmentResults" :key="crypto">
           <td>{{ crypto }}</td>
-          <td>{{ result.profit.toFixed(2) }}</td>
-          <td>{{ result.totalPurchase.toFixed(2) }}</td>
-          <td>{{ result.totalSales.toFixed(2) }}</td>
+          <td>{{ result.profit }}</td>
+          <td>{{ result.totalPurchase }}</td>
+          <td>{{ result.totalSales }}</td>
         </tr>
       </tbody>
     </table>
@@ -49,7 +49,7 @@ export default {
     async getCurrentPrice(cryptoCode) {
       try {
         const response = await getCryptoValues(cryptoCode);
-        return response.data.ask;
+        return response.ask;
       } catch (error) {
         console.error(`Error fetching price for ${cryptoCode}:`, error);
         return 0;
@@ -89,16 +89,20 @@ export default {
         const profit = currentValue - totalPurchase;
 
         this.investmentResults[cryptoCode] = {
-          profit: profit,
-          totalPurchase: totalPurchase,
-          totalSales: totalSales,
+          profit: this.formatearDinero(profit),
+          totalPurchase: this.formatearDinero(totalPurchase),
+          totalSales: this.formatearDinero(totalSales),
         };
       }
+    },
+    formatearDinero(cantidad) {
+        return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(cantidad);
     },
   },
   mounted() {
     this.fetchTransactions();
   },
+  
 };
 </script>
 

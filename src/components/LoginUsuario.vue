@@ -41,45 +41,87 @@
   </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 .div {
-  padding: 20px;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 400px;
   margin: 0 auto;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Anton', sans-serif;
+  color: #222222;
 }
 
-.input {
-  padding: 10px;
-  margin: 10px 0;
-  width: 100%;
-  max-width: 300px;
+h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #27AE60;
 }
 
 .label {
   display: block;
-  margin-bottom: 5px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
+  margin-bottom: 8px;
+  color: #222222;
+  font-size: 16px;
+  text-align: left;
   width: 100%;
   max-width: 300px;
 }
 
+.input {
+  padding: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 300px;
+  border: 2px solid #27AE60;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  border-color: #F1C40F;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #F1C40F;
+  color: #222222;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover:enabled {
+  background-color: #27AE60; 
+  color: #ffffff;
+  transform: scale(1.02);
+}
+
 button:disabled {
-  background-color: #ccc;
+  background-color: #cccccc;
+  color: #888888;
+  cursor: not-allowed;
 }
 
 @media (max-width: 600px) {
   .div {
     width: 90%;
+  }
+
+  h1 {
+    font-size: 22px;
   }
 }
 </style>

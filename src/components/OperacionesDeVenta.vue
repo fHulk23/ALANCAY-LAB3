@@ -93,37 +93,99 @@ import apiAxios from '@/service/apiAxios';
   };
   </script>
 
-  <style scoped>
-  .Operacion {
-    max-width: 400px;
-    margin: 0 auto;
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.OperacionesDeventa {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Anton', sans-serif;
+  color: #222222;
+}
+
+h2 {
+  color: #27AE60;
+  margin-bottom: 25px;
+  font-size: 24px;
+  text-align: center;
+}
+
+form div {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: #333333;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #27AE60;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+  border-color: #F1C40F;
+}
+
+.boton-operacionVenta {
+  width: 100%;
+  background-color: #F1C40F;
+  color: #222222;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-operacionVenta:hover {
+  background-color: #27AE60;
+  color: #ffffff;
+  transform: scale(1.02);
+}
+
+button:last-of-type {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #27AE60;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:last-of-type:hover {
+  background-color: #F1C40F;
+  color: #222222;
+  transform: scale(1.02);
+}
+
+@media (max-width: 600px) {
+  .OperacionesDeventa {
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    margin: 20px;
   }
-  
-  form div {
-    margin-bottom: 15px;
+
+  h2 {
+    font-size: 20px;
   }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input, select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  </style>
+}
+</style>

@@ -20,47 +20,72 @@
   };
   </script>
   
-  <style scoped>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 .Menu-Principal {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: 'Anton', sans-serif;
+  color: #222222;
+  text-align: center;
 }
 
 .logo {
-  max-width: 100%;
+  max-width: 200px;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 40px;
+  color: #27AE60;
 }
 
 nav ul {
   list-style-type: none;
   padding: 0;
-  text-align: center;
+  width: 100%;
+  max-width: 400px;
 }
 
 nav ul li {
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
-router-link {
+nav ul li a {
+  display: block;
+  background-color: #F1C40F; 
+  color: #222222;
   text-decoration: none;
-  color: #007bff;
+  padding: 15px 20px;
   font-size: 18px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  font-weight: bold;
 }
 
-router-link:hover {
-  text-decoration: underline;
+nav ul li a:hover {
+  background-color: #27AE60;
+  color: #ffffff;
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
 @media (max-width: 600px) {
-  nav ul li {
-    margin: 5px 0;
+  h1 {
+    font-size: 22px;
   }
 
-  router-link {
+  nav ul li a {
     font-size: 16px;
+    padding: 12px 16px;
   }
 }
 </style>

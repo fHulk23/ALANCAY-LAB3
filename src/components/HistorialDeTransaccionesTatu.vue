@@ -12,7 +12,7 @@
 
     <ul v-if="movimientos.length > 0">
       <li v-for="movimiento in movimientos" :key="movimiento._id">
-        <div>
+        <div class="info">
           <p><strong>Criptomoneda:</strong> {{ movimiento.crypto_code.toUpperCase() }}</p>
           <p><strong>Cantidad:</strong> {{ movimiento.crypto_amount }}</p>
           <p><strong>Monto (ARS):</strong> {{ movimiento.money }}</p>
@@ -20,13 +20,14 @@
           <p><strong>Fecha y hora:</strong> {{ formatDate(movimiento.datetime) }}</p>
         </div>
 
-        <div>
-          <button @click="editarMovimiento(movimiento._id)">Editar</button>
-          <button @click="borrarMovimiento(movimiento._id)">Borrar</button>
+        <div class="acciones">
+          <button class="btn-editar" @click="editarMovimiento(movimiento._id)">Editar</button>
+          <button class="btn-borrar" @click="borrarMovimiento(movimiento._id)">Borrar</button>
         </div>
       </li>
     </ul>
-     <button @click="volverMenu()">Volver al Menú</button>
+
+    <button class="boton-volver" @click="volverMenu()">Volver al Menú</button>
   </div>
 </template>
 
@@ -38,7 +39,7 @@ export default {
   data() {
     return {
       movimientos: [],
-      error: '',   
+      error: '',
     };
   },
   created() {
@@ -48,7 +49,6 @@ export default {
     async obtenerMovimientos() {
       try {
         const userId = localStorage.getItem("user_id");
-
         const response = await apiAxios.get(`/transactions?q={"user_id":"${userId}"}`);
         this.movimientos = response.data;
       } catch (error) {
@@ -63,7 +63,7 @@ export default {
     },
 
     editarMovimiento(id) {
-      this.$router.push({ name: 'editarMovimiento', params: { id } }); 
+      this.$router.push({ name: 'editarMovimiento', params: { id } });
     },
 
     async borrarMovimiento(id) {
@@ -78,7 +78,8 @@ export default {
         }
       }
     },
-    volverMenu(){
+
+    volverMenu() {
       this.$router.push('/Menuprincipal');
     },
   },
@@ -86,17 +87,24 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 .historial {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Anton', sans-serif;
+  color: #222222;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 26px;
+  color: #27AE60;
+  margin-bottom: 25px;
 }
 
 ul {
@@ -106,36 +114,107 @@ ul {
 
 li {
   background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  border: 2px solid #27AE60;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 button {
-  padding: 5px 10px;
-  margin-right: 10px;
-  background-color: #007bff;
-  color: white;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-family: 'Anton', sans-serif;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.btn-editar {
+  background-color: #F1C40F;
+  color: #222222;
+}
+
+.btn-editar:hover {
+  background-color: #27AE60;
+  color: #ffffff;
+}
+
+.btn-borrar {
+  background-color: #E74C3C;
+  color: white;
+}
+
+.btn-borrar:hover {
+  background-color: #C0392B;
+}
+
+.boton-volver {
+  margin-top: 30px;
+  width: 100%;
+  background-color: #27AE60;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.boton-volver:hover {
+  background-color: #F1C40F;
+  color: #222222;
+  transform: scale(1.02);
 }
 
 .error {
+  background-color: #ffdddd;
   color: red;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid red;
+  border-radius: 8px;
   text-align: center;
 }
 
 .no-movimientos {
   text-align: center;
+  color: #999;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
-button {
-  margin-top: 10px;
+@media (max-width: 600px) {
+  .historial {
+    padding: 20px;
+  }
+
+  li {
+    padding: 15px;
+  }
+
+  .info p {
+    font-size: 14px;
+  }
+
+  .acciones {
+    flex-direction: column;
+  }
+
+  .boton-volver {
+    font-size: 14px;
+  }
 }
 </style>
